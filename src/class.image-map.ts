@@ -16,6 +16,7 @@ export class ImageMap {
 		public height: number,
 		protected areas: Area[] = [],
 		protected name: string = "",
+		protected id: string = "",
 		public hasDefaultArea: boolean = false
 	) {}
 
@@ -40,6 +41,17 @@ export class ImageMap {
 
 	getName(): string {
 		return this.name;
+	}
+
+	setID(id: string): this {
+		if (id) {
+			this.id = id.replace(/\s+/g, "");
+		}
+		return this;
+	}
+
+	getID(): string {
+		return this.id;
 	}
 
 	setSize(width: number, height: number): this {
@@ -140,7 +152,9 @@ export class ImageMap {
 				areas.push('\t' + a.toHtml(scale));
 			}
 		});
-		return '<map name="' + this.name + '" id="' + this.name + '">\n' + areas.join('\n') + '\n</map>';
+		let html = '<img src="path/to/file/'+this.name+'" id="'+this.id+'" width="800" height="400" usemap="#'+this.name+'">\n'
+		html += '<map name="' + this.name + '">\n' + areas.join('\n') + '\n</map>'
+		return html
 	}
 
 	toSvg(scale = 1): string {

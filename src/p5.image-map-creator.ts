@@ -87,7 +87,7 @@ export class imageMapCreator {
 		if (!element) throw new Error('HTMLElement not found');
 		this.width = width;
 		this.height = height;
-		this.tool = "polygon";
+		this.tool = "rectangle";
 		this.drawingTools = ["rectangle", "circle", "polygon"];
 		this.settings;
 		this.tempArea = new AreaEmpty();
@@ -142,18 +142,24 @@ export class imageMapCreator {
 		let canvas = this.p5.createCanvas(this.width, this.height);
 		canvas.drop(this.handeFile.bind(this)).dragLeave(this.onLeave.bind(this)).dragOver(this.onOver.bind(this));
 		//@ts-ignore p5 types does not specify the canvas attribute
-		this.settings = QuickSettings.create(this.p5.width + 5, 0, "Image-map Creator", this.p5.canvas.parentElement)
+		this.settings = QuickSettings.create(this.p5.width + 5, 0, "Erajaya Map Creator", this.p5.canvas.parentElement)
 			.setDraggable(false)
 			.addText("Map Name", "", (v: string) => { this.map.setName(v) })
-			.addDropDown("Tool", ["polygon", "rectangle", "circle", "select", "delete", "test"], (v: ToolLabel) => { this.setTool(v.value) })
-			.addBoolean("Default Area", this.map.hasDefaultArea, (v: boolean) => { this.setDefaultArea(v) })
-			.addButton("Undo", this.undoManager.undo)
-			.addButton("Redo", this.undoManager.redo)
-			.addButton("Clear", this.clearAreas.bind(this))
-			.addButton("Generate Html", () => { this.settings.setValue("Output", this.map.toHtml()) })
-			.addButton("Generate Svg", () => { this.settings.setValue("Output", this.map.toSvg()) })
+			.addText("Map ID", "", (v: string) => { this.map.setID(v) })
+			.addDropDown("Tool", ["rectangle", "circle", "polygon", "select", "delete",], (v: ToolLabel) => { this.setTool(v.value) })
+			// .addBoolean("Default Area", this.map.hasDefaultArea, (v: boolean) => { this.setDefaultArea(v) })
+			// .addButton("Undo", this.undoManager.undo)
+			// .addButton("Redo", this.undoManager.redo)
+			// .addButton("Clear", this.clearAreas.bind(this))
+			.addButton("Generate", () => { 
+				this.settings.setValue("Output", this.map.toHtml()) 
+				// alert(this.map.toHtml())
+				// alert(this.map.getName())
+				// alert(this.map.getID())
+			})
+			// .addButton("Generate Svg", () => { this.settings.setValue("Output", this.map.toSvg()) })
 			.addTextArea("Output")
-			.addButton("Save", this.save.bind(this));
+			// .addButton("Save", this.save.bind(this));
 		//@ts-ignore Fix for oncontextmenu
 		this.p5.canvas.addEventListener("contextmenu", (e) => { e.preventDefault(); });
 		//@ts-ignore Fix for middle click mouse down triggers scroll on windows
