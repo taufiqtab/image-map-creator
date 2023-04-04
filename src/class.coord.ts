@@ -123,4 +123,8 @@ export class Coord implements Movable {
 		return this.toStr(dec, "x", scale) + "," + this.toStr(dec, "y", scale);
 	}
 
+	toHtmlNoSeparator(dec: number, scale = 1): string {
+		return this.toStr(dec, "x", scale) + this.toStr(dec, "y", scale);
+	}
+
 }

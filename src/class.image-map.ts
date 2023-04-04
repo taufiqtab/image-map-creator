@@ -152,7 +152,7 @@ export class ImageMap {
 				areas.push('\t' + a.toHtml(scale));
 			}
 		});
-		let html = '<img src="path/to/file/'+this.name+'" id="'+this.id+'" width="800" height="400" usemap="#'+this.name+'">\n'
+		let html = '<img src="'+this.name+'" id="'+this.id+'" usemap="#'+this.name+'">\n\n'
 		html += '<map name="' + this.name + '">\n' + areas.join('\n') + '\n</map>'
 		return html
 	}

@@ -179,12 +179,20 @@ export abstract class Area {
 		}).join(',');
 	}
 
+	htmlCoordsNoSeparator(dec: number, scale: number): string {
+		return this.drawingCoords().map(c => {
+			return c.toHtmlNoSeparator(dec, scale);
+		}).join('');
+	}
+
 	toHtml(scale: number = 1): string {
 		let htmlCoords = this.htmlCoords(0, scale);
+		let htmlCoordsNoSpearator = this.htmlCoordsNoSeparator(0, scale);
 		htmlCoords = htmlCoords ? `coords="${htmlCoords}"` : "";
-		const href = this.href ? `href="${this.href}"` : "nohref";
+		const href = this.href ? `href="${this.href}"` : 'href="#"';
 		const title = this.title ? `title="${this.title}"` : "";
-		return `<area shape="${this.shape}" ${htmlCoords} ${href} alt="${this.href}" ${title} />`;
+		const data = 'data-name="'+htmlCoordsNoSpearator+',all"';
+		return `<area shape="${this.shape}" ${htmlCoords} ${href} ${data} alt="${this.href}" ${title} />`;
 	}
 
 	toSvg(scale = 1): string {

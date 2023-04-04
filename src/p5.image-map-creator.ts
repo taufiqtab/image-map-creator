@@ -153,6 +153,14 @@ export class imageMapCreator {
 			// .addButton("Clear", this.clearAreas.bind(this))
 			.addButton("Generate", () => { 
 				this.settings.setValue("Output", this.map.toHtml()) 
+
+				// var theDiv = document.getElementById("applyme");
+				// var content = document.createTextNode(this.map.toHtml());
+				// theDiv!.appendChild(content);
+
+				document.getElementById("applyme")!.innerHTML = this.map.toHtml()
+				document.getElementById('clickme')!.click();
+
 				// alert(this.map.toHtml())
 				// alert(this.map.getName())
 				// alert(this.map.getID())
