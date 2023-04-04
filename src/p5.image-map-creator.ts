@@ -152,7 +152,7 @@ export class imageMapCreator {
 			// .addButton("Redo", this.undoManager.redo)
 			// .addButton("Clear", this.clearAreas.bind(this))
 			.addButton("Generate", () => { 
-				this.settings.setValue("Output", this.map.toHtml()) 
+				//this.settings.setValue("Output", this.map.toHtml()) 
 
 				// var theDiv = document.getElementById("applyme");
 				// var content = document.createTextNode(this.map.toHtml());
@@ -166,14 +166,14 @@ export class imageMapCreator {
 				// alert(this.map.getID())
 			})
 			// .addButton("Generate Svg", () => { this.settings.setValue("Output", this.map.toSvg()) })
-			.addTextArea("Output")
+			// .addTextArea("Output")
 			// .addButton("Save", this.save.bind(this));
 		//@ts-ignore Fix for oncontextmenu
 		this.p5.canvas.addEventListener("contextmenu", (e) => { e.preventDefault(); });
 		//@ts-ignore Fix for middle click mouse down triggers scroll on windows
 		this.p5.canvas.addEventListener("mousedown", (e) => { e.preventDefault(); });
 		//@ts-ignore Select all onclick on the Output field
-		document.getElementById("Output").setAttribute("onFocus", "this.select();");
+		// document.getElementById("Output").setAttribute("onFocus", "this.select();");
 	}
 
 	private draw(): void {
